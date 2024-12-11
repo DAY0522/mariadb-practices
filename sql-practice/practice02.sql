@@ -25,6 +25,9 @@ limit 1;
 select date_format(min(hire_date), '%Y년 %m월 %d일') as '가장 오래 근속한 직원의 입사일'
 from employees;
 
+select *
+from salaries;
+
 -- 문제4.
 -- 현재, 이 회사의 평균 연봉은 얼마입니까?
 select avg(salary) as '평균 연봉'
