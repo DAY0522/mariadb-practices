@@ -2,18 +2,17 @@ package example;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.sql.Statement;
 
-public class InsertEx01 {
+public class UpdateEx02 {
     public static void main(String[] args) {
-        insert("기획1팀");
-        insert("기획2팀");
+        update(new DepartmentVo(1L, "경영팀"));
     }
-    public static boolean insert(String departmentName) {
+    public static boolean update(DepartmentVo vo) {
         boolean result = false;
         Connection conn = null;
-        Statement stmt = null;
+        PreparedStatement pstmt = null;
 
         try {
             // 1. JDBC Driver 로딩
@@ -23,12 +22,16 @@ public class InsertEx01 {
             String url = "jdbc:mariadb://192.168.64.2:3306/webdb";
             conn = DriverManager.getConnection(url, "webdb", "webdb");
 
-            // 3. Statement 생성하기
-            stmt = conn.createStatement();
+            // 3. Statement 준비하기
+            String sql = "update department set name = ? where id = ?";
+            pstmt = conn.prepareStatement(sql);
 
-            // 4. SQL 실행
-            String sql = "insert into department values(null, '"+departmentName+"')";
-            int count = stmt.executeUpdate(sql);
+            // 4. Parameter Binding
+            pstmt.setString(1, vo.getName());
+            pstmt.setLong(2, vo.getId());
+
+            // 5. SQL 실행
+            int count = pstmt.executeUpdate();
 
             result = (count == 1);
         } catch (ClassNotFoundException e) {
@@ -37,15 +40,14 @@ public class InsertEx01 {
             System.out.println("error:" + e);
         } finally {
             try {
-                if(stmt != null)
-                    stmt.close();
+                if(pstmt != null)
+                    pstmt.close();
                 if(conn != null)
                     conn.close();
             } catch (SQLException e) {
                 e.printStackTrace();
             }
         }
-
         return result;
     }
 }
