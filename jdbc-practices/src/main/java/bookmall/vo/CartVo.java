@@ -5,6 +5,7 @@ public class CartVo {
     private Long bookNo;
     private int quantity;
     private int price;
+    private String bookTitle;
 
     public Long getUserNo() {
         return userNo;
@@ -39,7 +40,20 @@ public class CartVo {
     }
 
     public String getBookTitle() {
-        // 작성
-        return null;
+        return bookTitle;
+    }
+
+    public void setBookTitle(String bookTitle) {
+        this.bookTitle = bookTitle;
+    }
+
+    @Override
+    public String toString() {
+        return "CartVo{" +
+                "userNo=" + userNo +
+                ", bookNo=" + bookNo +
+                ", quantity=" + quantity +
+                ", price=" + price +
+                '}';
     }
 }

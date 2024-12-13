@@ -55,4 +55,16 @@ public class OrderVo {
     public void setStatus(String status) {
         Status = status;
     }
+
+    @Override
+    public String toString() {
+        return "OrderVo{" +
+                "no=" + no +
+                ", userNo=" + userNo +
+                ", number='" + number + '\'' +
+                ", payment=" + payment +
+                ", shipping='" + shipping + '\'' +
+                ", Status='" + Status + '\'' +
+                '}';
+    }
 }

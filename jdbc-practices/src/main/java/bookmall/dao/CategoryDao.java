@@ -92,9 +92,9 @@ public class CategoryDao {
         try {
             conn = getConnection();
 
-            String sql = "select id, name, mail, password, phonenumber" +
-                    " from user" +
-                    " order by id desc";
+            String sql = "select id, name" +
+                    " from category" +
+                    " order by id";
             pstmt = conn.prepareStatement(sql);
 
             rs = pstmt.executeQuery();

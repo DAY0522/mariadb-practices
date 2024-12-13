@@ -89,8 +89,8 @@ public class BookMallTest {
         mockOrderBookVo02.setQuantity(2);
         mockOrderBookVo02.setPrice(64000);
         orderDao.insertBook(mockOrderBookVo02);
-    }
 
+    }
 
     @Test
     public void testUser() {
@@ -105,7 +105,6 @@ public class BookMallTest {
     @Test
     public void testCart() {
         List<CartVo> list = cartDao.findByUserNo(mockUserVo01.getNo());
-
         assertEquals(2, list.size());
         assertEquals(mockBookVo01.getNo(), list.get(0).getBookNo());
         assertEquals(mockBookVo01.getTitle(), list.get(0).getBookTitle());

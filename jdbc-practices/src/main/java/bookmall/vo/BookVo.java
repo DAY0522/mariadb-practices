@@ -43,4 +43,14 @@ public class BookVo {
     public void setCategoryNo(Long categoryNo) {
         this.categoryNo = categoryNo;
     }
+
+    @Override
+    public String toString() {
+        return "BookVo{" +
+                "no=" + no +
+                ", title='" + title + '\'' +
+                ", price=" + price +
+                ", categoryNo=" + categoryNo +
+                '}';
+    }
 }

@@ -1,11 +1,10 @@
 package bookmall.dao;
 
 import bookmall.vo.CartVo;
+import bookmall.vo.UserVo;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CartDao {
@@ -47,6 +46,7 @@ public class CartDao {
     public void insert(CartVo vo) {
         Connection conn = null;
         PreparedStatement pstmt = null;
+        ResultSet rs = null;
         try {
             conn = getConnection();
 
@@ -76,7 +76,58 @@ public class CartDao {
     }
 
     public List<CartVo> findByUserNo(Long no) {
-        return null;
+        List<CartVo> result = new ArrayList<>();
+
+        Connection conn = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = getConnection();
+
+            String sql = "select user_id, book_id, quantity, c.price, title" +
+                    " from cart c join book b" +
+                    " on c.book_id = b.id" +
+                    " where user_id = ?";
+
+            pstmt = conn.prepareStatement(sql);
+            pstmt.setLong(1, no);
+
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                Long usetId = rs.getLong(1);
+                Long bookId = rs.getLong(2);
+                int quantity = rs.getInt(3);
+                int price = rs.getInt(4);
+                String title = rs.getString(5);
+
+                CartVo vo = new CartVo();
+                vo.setUserNo(usetId);
+                vo.setBookNo(bookId);
+                vo.setQuantity(quantity);
+                vo.setPrice(price);
+                vo.setBookTitle(title);
+
+                result.add(vo);
+            }
+        } catch (SQLException e) {
+            System.out.println("error:" + e);
+        } finally {
+            try {
+                if (rs != null) {
+                    rs.close();
+                }
+                if (conn != null) {
+                    conn.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException e) {
+                System.out.println("error:" + e);
+            }
+        }
+        return result;
     }
 
     private Connection getConnection() throws SQLException {
