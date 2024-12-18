@@ -1,8 +1,6 @@
 package bookmall.dao;
 
 import bookmall.vo.CategoryVo;
-import bookmall.vo.UserVo;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -76,10 +74,6 @@ public class CategoryDao {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public Long findNoByTitle(String title) {
-        return null;
     }
 
     public List<CategoryVo> findAll() {

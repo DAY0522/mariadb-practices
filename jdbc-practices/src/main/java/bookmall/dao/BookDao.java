@@ -44,8 +44,6 @@ public class BookDao {
     public void insert(BookVo vo) {
         Connection conn = null;
         PreparedStatement pstmt = null;
-
-        Long autoId = null;
         try {
             conn = getConnection();
 
@@ -59,8 +57,7 @@ public class BookDao {
 
             ResultSet rs = pstmt.getGeneratedKeys();
             if (rs.next()) {
-                autoId = rs.getLong(1);
-                vo.setNo(autoId);
+                vo.setNo(rs.getLong(1));
             }
 
         } catch (SQLException e) {

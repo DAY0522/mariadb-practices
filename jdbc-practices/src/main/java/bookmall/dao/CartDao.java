@@ -1,8 +1,6 @@
 package bookmall.dao;
 
 import bookmall.vo.CartVo;
-import bookmall.vo.UserVo;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;

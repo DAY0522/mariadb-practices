@@ -12,8 +12,5 @@
         <module name="jdbc-practices" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="jdbc-practicesd" target="21" />
-    </bytecodeTargetLevel>
   </component>
 </project>
